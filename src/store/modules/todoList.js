@@ -1,7 +1,9 @@
+//For state data
 const state = {
   todos: [],
 };
 
+//This Methods for view data without change data
 const getters = {
   showTodos: (state) => {
     return state.todos;
@@ -13,6 +15,7 @@ const getters = {
   },
 };
 
+//This methods for change value on state
 const mutations = {
   addTodo: (state, payload) => {
     state.todos.push({
@@ -39,21 +42,16 @@ const mutations = {
     if (state.todos.length === count) {
       for (index in state.todos) {
         state.todos[index].complete = false;
-        state.completeTodo = state.todos.filter((todo) => {
-          return todo.complete === true;
-        });
       }
     } else {
       for (index in state.todos) {
         state.todos[index].complete = true;
-        state.completeTodo = state.todos.filter((todo) => {
-          return todo.complete === true;
-        });
       }
     }
   },
 };
 
+//For Future update
 const actions = {};
 
 export default {
