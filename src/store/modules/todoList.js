@@ -1,6 +1,9 @@
 //For state data
 const state = {
   todos: [],
+  activeTask: false,
+  completeTask: false,
+  allTask: true,
 };
 
 //This Methods for view data without change data
@@ -11,7 +14,12 @@ const getters = {
   showCompleteTodo: (state) => {
     return state.todos.filter(function(todo) {
       return todo.complete === true;
-    }).length;
+    });
+  },
+  showActiveTask: (state) => {
+    return state.todos.filter(function(todo) {
+      return todo.complete === false;
+    });
   },
 };
 
@@ -48,6 +56,24 @@ const mutations = {
         state.todos[index].complete = true;
       }
     }
+  },
+  activeTaskView: (state) => {
+    state.activeTask = true;
+    state.allTask = false;
+    state.completeTask = false;
+    console.log(state.allTask, state.completeTask, state.activeTask);
+  },
+  completeTaskView: (state) => {
+    state.activeTask = false;
+    state.allTask = false;
+    state.completeTask = true;
+    console.log(state.allTask, state.completeTask, state.activeTask);
+  },
+  allTaskView: (state) => {
+    state.activeTask = false;
+    state.allTask = true;
+    state.completeTask = false;
+    console.log(state.allTask, state.completeTask, state.activeTask);
   },
 };
 

@@ -21,7 +21,9 @@
                 <v-col 
                 cols="3"
                 class="text-right">
-                    <v-btn normal text color="green" @click="isEdit">Edit</v-btn>
+                    <v-btn normal text color="green" @click="isEdit">
+                        <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
                     <v-btn normal text color="error" @click="removeTodo" >
                         <i class="far fa-trash-alt" ></i>
                     </v-btn> 

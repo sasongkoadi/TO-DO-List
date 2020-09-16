@@ -16,14 +16,16 @@
                 normal 
                 color="primary" 
                 @click="completeAll">
-
-                    <caption >Complete : {{showCompleteTodo}}</caption>
-
+                    <caption >Complete : {{showCompleteTodo.length}}</caption>
                 </v-btn>
               </v-col>
 
               <v-col 
-              cols="6">
+              cols="6"
+              class="text-center">
+                <v-btn text normal color="grey" @click="allTaskView" >All</v-btn>
+                <v-btn text normal color="grey" @click="activeTaskView" >Active</v-btn>
+                <v-btn text normal color="grey" @click="completeTaskView" >Complete</v-btn>
               </v-col>
 
               <v-col 
@@ -31,9 +33,7 @@
               class="text-center">
 
                 <v-btn text normal disabled >
-
                     <caption>Item : {{showTodos.length}}</caption>
-
                 </v-btn>
 
               </v-col>
@@ -62,12 +62,16 @@ import { mapGetters, mapMutations }  from 'vuex'
 export default {
     name: "Footer",
     methods: {
-        ...mapMutations(['completeAll']) 
+        ...mapMutations([
+            'completeAll',
+            'activeTaskView',
+            'completeTaskView',
+            'allTaskView']) 
     },
     computed: {
         ...mapGetters([
             'showTodos',
-            'showCompleteTodo'])
+            'showCompleteTodo']),
     },
 }
 </script>

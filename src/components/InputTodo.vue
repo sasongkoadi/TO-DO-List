@@ -5,11 +5,11 @@
         max-height="600"
         tile >
        <v-text-field 
-       class="TextInput"
-       ref="disableInput"
-       label="What's On Your Mind?"
-       @keyup.enter="addTodoList"
-       clearable/>
+        class="TextInput"
+        ref="disableInput"
+        label="What's On Your Mind?"
+        @keyup.enter="addTodoList"
+        clearable/>
     </v-card>
 </template>
 
