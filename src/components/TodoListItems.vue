@@ -1,7 +1,16 @@
 <template>
     <v-list-item-content>
         <v-list-item-content class="listGroup">
-            <v-row>
+            <v-row v-if="input === true">
+                <v-col>
+                    <v-text-field 
+                    label="What's Your New Idea" 
+                    @mouseleave="cancelEdit" 
+                    ref="disableEdit" 
+                    @keyup.enter="editTask"></v-text-field>
+                </v-col> 
+            </v-row>
+            <v-row v-else>
                 <v-col
                 cols="9"
                 class="text-left">
@@ -10,13 +19,14 @@
                 </v-col>
                 <v-col 
                 cols="3"
-                class="text-right">                  
-                   <v-btn normal text color="error" @click="removeTodo" >
-                   <i class="far fa-trash-alt" ></i>
-                   </v-btn> 
+                class="text-right">
+                    <v-btn normal text color="green" @click="isEdit">Edit</v-btn>
+                    <v-btn normal text color="error" @click="removeTodo" >
+                        <i class="far fa-trash-alt" ></i>
+                    </v-btn> 
                 </v-col>
             </v-row>
-        </v-list-item-content>       
+        </v-list-item-content>
     </v-list-item-content>
 </template>
 
@@ -26,7 +36,6 @@ export default {
     name: "TodoListItems",
     data(){
         return {
-            text: String,
             input: false
         }
     },
@@ -41,12 +50,20 @@ export default {
             "changeTodo" 
             ]),
         removeTodo(){
-            console.log(this.index)
             this.deleteTodo(this.index)
         },
         itsDone(){
             this.completeTodo(this.index)
         },
+        isEdit(){
+            this.input = true
+        },
+        cancelEdit(){
+            this.input = false
+        },
+        editTask(){
+            this.changeTodo({ number: this.index, payload: event.target.value })
+        }
     },
 }
 </script>
