@@ -1,4 +1,8 @@
-# todolist-vue
+# TO DO LIST
+
+![TODO LIST App Input](./ImagesReadme/Input.png)
+![TODO LIST App Add Task](./ImagesReadme/AddTask.png)
+![TODO LIST App Complete Task](./ImagesReadme/CompleteTask.png)
 
 ## Project setup
 ```
@@ -19,6 +23,8 @@ npm run build
 ```
 npm run lint
 ```
+
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
