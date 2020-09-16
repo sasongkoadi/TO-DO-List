@@ -4,8 +4,9 @@
             <v-row v-if="input === true">
                 <v-col>
                     <v-text-field 
+                    class="text-list"
                     label="What's Your New Idea" 
-                    @mouseleave="cancelEdit" 
+                    @mouseout="cancelEdit" 
                     ref="disableEdit" 
                     @keyup.enter="editTask"></v-text-field>
                 </v-col> 
