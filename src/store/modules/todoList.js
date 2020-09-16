@@ -26,7 +26,7 @@ const mutations = {
   deleteTodo: (state, number) => {
     state.todos.splice(number, 1);
   },
-  changeTodo: (state, number, payload) => {
+  changeTodo: (state, { number, payload }) => {
     state.todos[number].text = payload;
   },
   completeTodo: (state, number) => {

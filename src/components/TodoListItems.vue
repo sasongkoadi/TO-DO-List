@@ -62,7 +62,7 @@ export default {
             this.input = false
         },
         editTask(){
-            this.changeTodo(this.index, event.target.value)
+            this.changeTodo({ number: this.index, payload: event.target.value })
         }
     },
 }
