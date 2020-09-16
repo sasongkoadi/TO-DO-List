@@ -1,28 +1,52 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+    </v-app-bar>
+
+    <v-main>
+      
+      <v-container>
+
+       <Title />
+       <InputTodo /> 
+       <TodoList />
+
+       <div v-if="showTodos.length >= 1">
+        <Footer />
+       </div>
+
+       <div v-else>
+       </div>
+
+      </v-container>
+
+    </v-main>
+
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Title from './components/Title'
+import InputTodo  from './components/InputTodo'
+import TodoList  from './components/TodoList'
+import Footer from './components/Footer'
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+      Title,
+      InputTodo,
+      TodoList,
+      Footer
+  },
+  computed: {
+    ...mapGetters(["showTodos"]) 
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
