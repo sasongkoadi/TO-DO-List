@@ -4,7 +4,7 @@
        max-width="700"
        tile >
 
-       <div v-if="activeTask === true">
+       <div v-if="activeTask === 1">
         <template  v-for="(todo,index) in showActiveTask" >
             <v-list-item :key="todo.text">
                 <TodoListItems :todo="todo" :index="index"></TodoListItems> 
@@ -12,7 +12,7 @@
         </template>
        </div>
 
-       <div v-if="activeTask === false">
+       <div v-else-if="activeTask === 2">
         <template  v-for="(todo,index) in showCompleteTodo" >
             <v-list-item :key="todo.text">
                 <TodoListItems :todo="todo" :index="index"></TodoListItems> 
@@ -21,12 +21,13 @@
        </div>
 
        <div v-else>
-        <template  v-for="(todo,index) in showTodos" >
+        <template  v-for="(todo,index) in showTodos">
             <v-list-item :key="todo.text">
                 <TodoListItems :todo="todo" :index="index"></TodoListItems> 
             </v-list-item>
         </template>
        </div>
+
     </v-card>
 </template>
 
@@ -42,10 +43,7 @@ export default {
        
    },
    computed: {
-       ...mapState([
-           'activeTask',
-           'completeTask',
-           'allTask']),
+       ...mapState(['activeTask']),
        ...mapGetters([
            'showTodos',
            'showActiveTask',

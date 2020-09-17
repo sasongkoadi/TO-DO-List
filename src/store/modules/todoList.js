@@ -1,9 +1,7 @@
 //For state data
 const state = {
   todos: [],
-  activeTask: false,
-  completeTask: false,
-  allTask: true,
+  activeTask: null,
 };
 
 //This Methods for view data without change data
@@ -58,22 +56,15 @@ const mutations = {
     }
   },
   activeTaskView: (state) => {
-    state.activeTask = true;
-    state.allTask = false;
-    state.completeTask = false;
-    console.log(state.allTask, state.completeTask, state.activeTask);
+    state.activeTask = 1;
+    console.log(state.activeTask);
   },
   completeTaskView: (state) => {
-    state.activeTask = false;
-    state.allTask = false;
-    state.completeTask = true;
-    console.log(state.allTask, state.completeTask, state.activeTask);
+    state.activeTask = 2;
+    console.log(state.activeTask);
   },
   allTaskView: (state) => {
-    state.activeTask = false;
-    state.allTask = true;
-    state.completeTask = false;
-    console.log(state.allTask, state.completeTask, state.activeTask);
+    (state.activeTask = null), console.log(state.activeTask);
   },
 };
 
