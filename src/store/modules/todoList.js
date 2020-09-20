@@ -9,7 +9,7 @@ const getters = {
     return state.todos;
   },
   showCompleteTodo: (state) => {
-    return state.todos.filter(function(todo) {
+    return state.todos.filter(function (todo) {
       return todo.complete === true;
     }).length;
   },
@@ -17,20 +17,20 @@ const getters = {
 
 //This methods for change value on state
 const mutations = {
-  addTodo: (state, payload) => {
+  addTodo: (state, { payload }) => {
     state.todos.push({
       text: payload,
       complete: false,
     });
   },
-  deleteTodo: (state, number) => {
-    state.todos.splice(number, 1);
+  deleteTodo: (state, { index }) => {
+    state.todos.splice(index, 1);
   },
-  changeTodo: (state, { number, payload }) => {
-    state.todos[number].text = payload;
+  changeTodo: (state, { index, payload }) => {
+    state.todos[index].text = payload;
   },
-  completeTodo: (state, number) => {
-    state.todos[number].complete = !state.todos[number].complete;
+  completeTodo: (state, { index }) => {
+    state.todos[index].complete = !state.todos[index].complete;
   },
   completeAll: (state) => {
     var count = 0;

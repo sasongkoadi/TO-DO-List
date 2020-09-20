@@ -51,10 +51,10 @@ export default {
             "changeTodo" 
             ]),
         removeTodo(){
-            this.deleteTodo(this.index)
+            this.deleteTodo({index: this.index})
         },
         itsDone(){
-            this.completeTodo(this.index)
+            this.completeTodo({index:this.index})
         },
         isEdit(){
             this.input = true
@@ -63,7 +63,7 @@ export default {
             this.input = false
         },
         editTask(){
-            this.changeTodo({ number: this.index, payload: event.target.value })
+            this.changeTodo({ index: this.index, payload: event.target.value })
         }
     },
 }

@@ -29,7 +29,7 @@ export default {
         addTodoList(event){
             if (!event.target.value.trim()) return;
             this.item = event.target.value
-            this.addTodo(this.item)
+            this.addTodo({payload: this.item})
             this.$refs.disableInput.reset()
         }
     },
