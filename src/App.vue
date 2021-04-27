@@ -11,8 +11,8 @@
     <v-main>
       
       <v-container>
-
-       <Title />
+        <router-view></router-view>
+       <!-- <Title />
        <InputTodo /> 
        <TodoList />
 
@@ -21,7 +21,7 @@
        </div>
 
        <div v-else>
-       </div>
+       </div> -->
 
       </v-container>
 
@@ -31,22 +31,22 @@
 </template>
 
 <script>
-import Title from './components/Title'
-import InputTodo  from './components/InputTodo'
-import TodoList  from './components/TodoList'
-import Footer from './components/Footer'
-import {mapGetters} from 'vuex'
+// import Title from './components/Title'
+// import InputTodo  from './components/InputTodo'
+// import TodoList  from './components/TodoList'
+// import Footer from './components/Footer'
+// import {mapGetters} from 'vuex'
 
 export default {
   name: 'App',
-  components: {
-      Title,
-      InputTodo,
-      TodoList,
-      Footer
-  },
-  computed: {
-    ...mapGetters(["showTodos"]) 
-  },
+  // components: {
+  //     Title,
+  //     InputTodo,
+  //     TodoList,
+  //     Footer
+  // },
+  // computed: {
+  //   ...mapGetters(["showTodos"]) 
+  // },
 };
 </script>
