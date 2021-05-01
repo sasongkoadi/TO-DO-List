@@ -1,22 +1,23 @@
 <template>
     <v-container>
         <Title :title="title"/>
-        <LoginForm />
+        <RegLoginForm :isLoginPage=isLoginPage />
     </v-container>
 </template>
 
 <script>
-import LoginForm from '../components/LoginForm'
+import RegLoginForm from '../components/RegLoginForm'
 import Title from '../components/Title'
 export default {
     name: 'Home',
     data() {
         return {
-            title: 'TO DO LIST'
+            title: 'LOGIN ',
+            isLoginPage: true
         }
     },
     components: {
-        LoginForm,
+        RegLoginForm,
         Title
     },
 

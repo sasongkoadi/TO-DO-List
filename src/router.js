@@ -17,5 +17,10 @@ export const router = new Router({
             name: 'TodolistView',
             component: () => import('./views/TodolistView.vue')
         },
+        {
+            path: '/register',
+            name: 'Register',
+            component: () => import('./views/Register.vue')
+        },
     ]
 })
