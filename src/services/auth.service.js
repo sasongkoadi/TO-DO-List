@@ -10,18 +10,23 @@ class AuthService {
         })
         .then(response => {
             if (response.data.token) {
-                localStorage.setItem('user', JSON.stringify(response.data))
+                const userData = response.data
+                localStorage.setItem('user', JSON.stringify(userData))
             }
             return response.data
         })
     }
     
-    logout(token){
-        return axios.post(API_URL + 'logout', {}, { headers: { Authorization: `Bearer ${token}`}})
+    async logout(token){
+        try {
+            await axios.post(API_URL + 'logoutAll', {}, { headers: { Authorization: `Bearer ${token}`}})
             .then(response =>{
-                localStorage.removeItem('user')
-                response.status
-            })
+                return response
+            })    
+        } catch (error) {
+            return error
+        }
+        
     }
 
     register(user){

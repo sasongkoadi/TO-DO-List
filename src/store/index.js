@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from 'vuex-persistedstate'
 import todoList from "./modules/todoList";
 import auth from './modules/authModule'
 
@@ -10,4 +11,5 @@ export default new Vuex.Store({
     todoList,
     auth
   },
+  plugins: [createPersistedState()]
 });

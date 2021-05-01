@@ -1,42 +1,42 @@
 import AuthService from '../../services/auth.service'
 
-const userData = JSON.parse(localStorage.getItem('user'))
-const initialState = userData
-    ? { status: { loggedIn: true }, userData}
-    : { status: { loggedIn: false }, userData: null}
+// const initialState = state.userData
+//   ? { status: { loggedIn: true },  data: state.userData}
+//   : { status: { loggedIn: false }, data: null};
 
 const state = {
-    user: initialState
+    user: { status: { loggedIn: false }, data: null}
 }
 
 const getters = {
     showUser: (state) => {
+        console.log(state.user);
         return state.user
     }
 }
 
 const mutations = {
     loginSuccess(state) {
-        state.status.loggedIn = true,
-        state.user = userData 
+        state.user.status.loggedIn = true,
+        state.user.data = JSON.parse(localStorage.getItem('user'));
     },
 
     loginFailure(state) {
-        state.status.loggedIn = false,
-        state.user = null
+        state.user.status.loggedIn = false,
+        state.user.data = null
     },
 
     logout(state) {
-        state.status.loggedIn = false,
-        state.user = null
+        state.user.status.loggedIn = false
+        state.user.data = null
     },
 
     registerSuccess(state) {
-        state.status.loggedIn = false
+        state.user.status.loggedIn = false
     },
 
     registerFailure(state) {
-        state.status.loggedIn = false
+        state.user.status.loggedIn = false
     }
 }
 
@@ -49,6 +49,7 @@ const actions = {
             },
             error => {
                 commit('loginFailure')
+                console.log(error);
                 return Promise.reject(error)
             }
         )
@@ -62,18 +63,17 @@ const actions = {
             },
             error => {
                 commit('registerFailure')
-                return Promise.resolve(error)
+                return Promise.reject(error)
             }
         )
     },
 
-    logout(userData) {
-        const token = userData.status.user.token
-        return AuthService.logout(token).then(
-            response => {
-                return response
-            }
-        )
+    async logout({commit}) {
+        const data = await JSON.parse(localStorage.getItem('user'))
+        const token = data.token
+        await AuthService.logout(token)
+        await commit('logout')
+
     }
 }
 

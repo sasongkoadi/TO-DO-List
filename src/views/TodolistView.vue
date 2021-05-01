@@ -1,6 +1,6 @@
 <template>
     <v-container>
-       <Title />
+       <Title :title="title" />
        <InputTodo /> 
        <TodoList />
 
@@ -28,8 +28,24 @@ export default {
       TodoList,
       Footer
   },
+  data() {
+      return {
+          title: 'YOUR TO DO'
+      }
+  },
   computed: {
-    ...mapGetters(["showTodos"]) 
+    ...mapGetters([
+      "showTodos",
+      ]), 
+    loggedIn(){
+        console.log(this.$store.state.auth);
+        return this.$store.state.auth.user.status.loggedIn
+    }
+  },
+  mounted() {
+      if(!this.loggedIn){
+          this.$router.push({ name: 'Home'}).catch(() => {})
+      }
   },
 };
 </script>

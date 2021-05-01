@@ -7,7 +7,7 @@
        <v-text-field 
        class="TextInput"
        ref="disableInput"
-       label="What's On Your Mind?"
+       label="What's Your Focus for Today ?"
        @keyup.enter="addTodoList"
        clearable/>
     </v-card>

@@ -9,15 +9,12 @@ export const router = new Router({
     routes: [
         {
             path: '/',
-            name: 'home',
+            name: 'Home',
             component: Home
         },
-        // {
-        //     path: '/home',
-        //     component: Home
-        // },
         {
             path: '/todo',
+            name: 'TodolistView',
             component: () => import('./views/TodolistView.vue')
         },
     ]

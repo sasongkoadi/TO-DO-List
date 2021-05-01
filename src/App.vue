@@ -6,6 +6,10 @@
       color="primary"
       dark
     >
+      <v-spacer></v-spacer>
+        <v-btn icon>
+          <i class="fa fa-sign-in fa-2x" aria-hidden="true" @click="handleLogout"></i>
+        </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -31,22 +35,17 @@
 </template>
 
 <script>
-// import Title from './components/Title'
-// import InputTodo  from './components/InputTodo'
-// import TodoList  from './components/TodoList'
-// import Footer from './components/Footer'
-// import {mapGetters} from 'vuex'
-
+import { mapMutations } from 'vuex'
 export default {
   name: 'App',
-  // components: {
-  //     Title,
-  //     InputTodo,
-  //     TodoList,
-  //     Footer
-  // },
-  // computed: {
-  //   ...mapGetters(["showTodos"]) 
-  // },
+  methods: {
+    ...mapMutations([
+      'logout'
+    ]),
+    async handleLogout(){
+      await this.$store.dispatch('auth/logout' )
+      return this.$router.push({ name: 'Home'}).catch(() => {})
+    }
+  },
 };
 </script>
