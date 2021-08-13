@@ -110,14 +110,14 @@
                 <v-btn 
                 class="d-flex mb-4"
                 @click="handleRegister" 
-                :loading=loading>
+                :loading=loading
+                :disabled="validInput">
                     Register 
                 </v-btn>
                 
                 <v-btn
                 class="d-flex mb-4"
-                @click="loginPage"
-                :loading=loading>
+                @click="loginPage">
                     Sign In
                 </v-btn>
                 <div class="d-flex mb-6"/>
@@ -127,8 +127,10 @@
         <div>
             <v-alert
                 v-if="message" 
-                
-            ></v-alert>
+                dense
+                outlined
+                :type="successful ? 'success' : 'error'" 
+            >{{message}}</v-alert>
         </div>
 
     </form>
@@ -164,7 +166,9 @@ export default {
             email: '',
             password: '',
             message:'',
+            successful: false,
             loading: false,
+            disabled: true,
             alert: true,
             showError: false,
             show1: false,
@@ -194,6 +198,13 @@ export default {
             !this.$v.user.password.minLength && errors.push(`Password must have at least 8 letters.`)
             !this.$v.user.password.required && errors.push('Password is required')
             return errors
+        },
+        validInput(){
+            if (this.$v.user.name.required && this.$v.user.email.email && this.$v.user.password.required) {
+                return false 
+            } else {
+                return true
+            }
         }
     },
     mounted() {
@@ -227,7 +238,15 @@ export default {
             this.loading = true
             this.$store.dispatch('auth/register', this.user).then(
                 data => {
-                    this
+                    this.message = data.message
+                    this.successful = true
+                    this.loading = false
+                },
+                error => {
+                    console.log(error);
+                    this.message = error.key
+                    this.successful = false
+                    this.loggedIn = false
                 }
             )
         },

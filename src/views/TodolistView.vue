@@ -18,7 +18,9 @@ import Title from '../components/Title'
 import InputTodo  from '../components/InputTodo'
 import TodoList  from '../components/TodoList'
 import Footer from '../components/Footer'
-import {mapGetters} from 'vuex'
+import {
+    mapGetters,
+    mapActions} from 'vuex'
 
 export default {
   name: 'App',
@@ -38,14 +40,21 @@ export default {
       "showTodos",
       ]), 
     loggedIn(){
+        console.log(this.$store);
         console.log(this.$store.state.auth);
         return this.$store.state.auth.user.status.loggedIn
     }
   },
   mounted() {
+      this.$store.dispatch('tasks.myTodos')
       if(!this.loggedIn){
           this.$router.push({ name: 'Home'}).catch(() => {})
       }
+  },
+  methods: {
+    ...mapActions({
+        mytodos: "tasks/myTodos"
+    }), 
   },
 };
 </script>
