@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import {mapMutations}  from 'vuex'
 export default {
     name: "InputTodo",
     data(){
@@ -23,13 +22,11 @@ export default {
         }
     },
     methods: {
-        ...mapMutations({
-            addTodo:'tasks/addTodo'
-        }),
         addTodoList(event){
             if (!event.target.value.trim()) return;
             this.item = event.target.value
-            this.addTodo({payload: this.item})
+            console.log(this.item);
+            this.$store.dispatch('tasks/addTask', this.item)
             this.$refs.disableInput.reset()
         }
     },

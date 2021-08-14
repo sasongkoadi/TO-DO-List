@@ -58,7 +58,7 @@ const mutations = {
 
     tasksData(state, payload) {
       state.todos = payload
-      console.log('todos data',state.todos);
+      console.log('todos',state.todos);
     }
 
 };
@@ -68,9 +68,20 @@ const actions = {
 
   async myTodos({commit}){
       const data = await todoService.showTasks() 
-      commit('tasksData', data)
-      console.log('action test', data);
+      await commit('tasksData', data)
   },
+
+  async addTask({commit}, task) {
+      await todoService.addTask(task)
+      await commit('addTodo', { payload: task})
+  },
+
+  async editTask({commit}, { id, index, description, status} ){
+    await todoService.editTask({id: id, text: description, status: status})
+    await commit('changeTodo', {index: index, payload: description})
+    await commit('completeTodo', {index: index})
+
+  }
 
 };
 

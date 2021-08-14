@@ -45,16 +45,17 @@ export default {
         index: Number
     },
     methods: {
-        ...mapMutations([
-            'deleteTodo',
-            "completeTodo",
-            "changeTodo" 
-            ]),
+        ...mapMutations({
+            deleteTodo : 'tasks/deleteTodo',
+            completeTodo : "tasks/completeTodo",
+            changeTodo : "tasks/changeTodo", 
+            }),
         removeTodo(){
             this.deleteTodo({index: this.index})
         },
         itsDone(){
-            this.completeTodo({index:this.index})
+            console.log('Boolean :',!this.todo.complete);
+            this.$store.dispatch('tasks/editTask', { id: this.todo._id, index: this.index, description: this.todo.description, status: !this.todo.complete} )
         },
         isEdit(){
             this.input = true
@@ -63,7 +64,7 @@ export default {
             this.input = false
         },
         editTask(){
-            this.changeTodo({ index: this.index, payload: event.target.value })
+            this.$store.dispatch('tasks/editTask', { id: this.todo._id, index: this.index, description: event.target.value, status: this.todo.complete} )
         }
     },
 }

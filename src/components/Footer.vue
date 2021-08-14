@@ -68,7 +68,7 @@ export default {
     computed: {
         ...mapGetters({
            showTodos :'tasks/showTodos',
-            showCompleteTodo: 'tasks/showCompleteTodo'})
+           showCompleteTodo: 'tasks/showCompleteTodo'})
     },
 }
 </script>
