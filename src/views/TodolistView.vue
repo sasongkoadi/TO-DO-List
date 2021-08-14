@@ -20,7 +20,7 @@ import TodoList  from '../components/TodoList'
 import Footer from '../components/Footer'
 import {
     mapGetters,
-    mapActions} from 'vuex'
+    } from 'vuex'
 
 export default {
   name: 'App',
@@ -36,25 +36,20 @@ export default {
       }
   },
   computed: {
-    ...mapGetters([
-      "showTodos",
-      ]), 
+    ...mapGetters({
+        showTodos: "tasks/showTodos",
+      }), 
     loggedIn(){
-        console.log(this.$store);
-        console.log(this.$store.state.auth);
         return this.$store.state.auth.user.status.loggedIn
     }
   },
   mounted() {
-      this.$store.dispatch('tasks.myTodos')
+      if(this.loggedIn){
+          this.$store.dispatch('tasks/myTodos')
+      }
       if(!this.loggedIn){
           this.$router.push({ name: 'Home'}).catch(() => {})
       }
-  },
-  methods: {
-    ...mapActions({
-        mytodos: "tasks/myTodos"
-    }), 
   },
 };
 </script>

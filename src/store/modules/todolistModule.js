@@ -1,3 +1,5 @@
+import todoService from "../../services/todo.service";
+
 //For state data
 const state = {
   todos: [],
@@ -17,51 +19,59 @@ const getters = {
 
 //This methods for change value on state
 const mutations = {
-  addTodo: (state, { payload }) => {
-    state.todos.push({
-      text: payload,
-      complete: false,
-    });
-  },
-  deleteTodo: (state, { index }) => {
-    state.todos.splice(index, 1);
-  },
-  changeTodo: (state, { index, payload }) => {
-    state.todos[index].text = payload;
-  },
-  completeTodo: (state, { index }) => {
-    state.todos[index].complete = !state.todos[index].complete;
-  },
-  completeAll: (state) => {
-    var count = 0;
-    for (var index in state.todos) {
-      if (state.todos[index].complete === true) {
-        count++;
-      }
+    addTodo: (state, { payload }) => {
+        state.todos.push({
+          description: payload,
+          complete: false,
+        });
+    },
+
+    deleteTodo: (state, { index }) => {
+        state.todos.splice(index, 1);
+    },
+
+    changeTodo: (state, { index, payload }) => {
+        state.todos[index].description = payload;
+    },
+
+    completeTodo: (state, { index }) => {
+        state.todos[index].complete = !state.todos[index].complete;
+    },
+
+    completeAll: (state) => {
+        var count = 0;
+        for (var index in state.todos) {
+          if (state.todos[index].complete === true) {
+            count++;
+          }
+        }
+        if (state.todos.length === count) {
+          for (index in state.todos) {
+            state.todos[index].complete = false;
+          }
+        } else {
+          for (index in state.todos) {
+            state.todos[index].complete = true;
+          }
+        }
+    },
+
+    tasksData(state, payload) {
+      state.todos = payload
+      console.log('todos data',state.todos);
     }
-    if (state.todos.length === count) {
-      for (index in state.todos) {
-        state.todos[index].complete = false;
-      }
-    } else {
-      for (index in state.todos) {
-        state.todos[index].complete = true;
-      }
-    }
-  },
-  test: (state) => {
-    state.todos.push({
-      text: 'Testing',
-      complete: false
-    })
-  }
+
 };
 
 //For Future update
 const actions = {
+
   async myTodos({commit}){
-    await commit.test()
+      const data = await todoService.showTasks() 
+      commit('tasksData', data)
+      console.log('action test', data);
   },
+
 };
 
 export default {

@@ -1,14 +1,15 @@
 import axios from 'axios'
+import authHeader from './auth-header'
 
 const API_URL = 'http://127.0.0.1:44010/tasks/'
 
 class todoService {
-    async showTasks(userData){
+    async showTasks(){
         try {
-           await axios.get(API_URL + 'showtasks', userData) 
-           .then(response => {return response})
+           const response = await axios.get(API_URL + 'showtasks', { headers: authHeader() } )
+           return response.data 
         } catch (error) {
-            return error    
+            return error
         }
     }
 }

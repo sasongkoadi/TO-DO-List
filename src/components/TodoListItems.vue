@@ -15,8 +15,8 @@
                 <v-col
                 cols="9"
                 class="text-left">
-                    <v-list-item-title  v-if="todo.complete === false"  class="text-list" @click="itsDone">{{todo.text}}</v-list-item-title>
-                    <v-list-item-title  v-else class="text-list complete" @click="itsDone">{{todo.text}}</v-list-item-title>
+                    <v-list-item-title  v-if="todo.complete === false"  class="text-list" @click="itsDone">{{todo.description}}</v-list-item-title>
+                    <v-list-item-title  v-else class="text-list complete" @click="itsDone">{{todo.description}}</v-list-item-title>
                 </v-col>
                 <v-col 
                 cols="3"

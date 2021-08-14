@@ -62,12 +62,13 @@ import { mapGetters, mapMutations }  from 'vuex'
 export default {
     name: "Footer",
     methods: {
-        ...mapMutations(['completeAll']) 
+        ...mapMutations({
+           completeAll :'tasks/completeAll'}) 
     },
     computed: {
-        ...mapGetters([
-            'showTodos',
-            'showCompleteTodo'])
+        ...mapGetters({
+           showTodos :'tasks/showTodos',
+            showCompleteTodo: 'tasks/showCompleteTodo'})
     },
 }
 </script>

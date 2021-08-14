@@ -23,9 +23,9 @@ export default {
         }
     },
     methods: {
-        ...mapMutations([
-            'addTodo'
-        ]),
+        ...mapMutations({
+            addTodo:'tasks/addTodo'
+        }),
         addTodoList(event){
             if (!event.target.value.trim()) return;
             this.item = event.target.value

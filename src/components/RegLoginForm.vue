@@ -224,6 +224,7 @@ export default {
             this.loading = true
             this.$store.dispatch('auth/login', this.user).then(
                 () => {
+                    this.$store.dispatch('tasks/myTodos')
                     return this.$router.push({ path: '/todo' }).catch(() => {})
                 },
                 error => {
