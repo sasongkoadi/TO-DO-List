@@ -37,6 +37,16 @@ class todoService {
         }
     }
 
+    async deleteTask(id){
+        try {
+           const response = await axios.delete(API_URL + 'delete/'+id, { headers: authHeader()}) 
+           console.log(response);
+           return response
+        } catch (error) {
+           return error 
+        }
+    }
+
 }
 
 export default new todoService()

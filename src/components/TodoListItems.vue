@@ -51,7 +51,7 @@ export default {
             changeTodo : "tasks/changeTodo", 
             }),
         removeTodo(){
-            this.deleteTodo({index: this.index})
+            this.$store.dispatch('tasks/deleteTask', {index: this.index, id: this.todo._id})
         },
         itsDone(){
             console.log('Boolean :',!this.todo.complete);

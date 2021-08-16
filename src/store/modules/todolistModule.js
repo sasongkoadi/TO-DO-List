@@ -58,7 +58,10 @@ const mutations = {
 
     tasksData(state, payload) {
       state.todos = payload
-      console.log('todos',state.todos);
+    },
+
+    clearTasks(state) {
+      state.todos = []
     }
 
 };
@@ -81,7 +84,32 @@ const actions = {
     await commit('changeTodo', {index: index, payload: description})
     await commit('completeTodo', {index: index})
 
-  }
+  },
+
+  async deleteTask({commit},{id, index}) {
+    await todoService.deleteTask(id)
+    await commit('deleteTodo', {index: index})
+  },
+
+  async completeAllTasks({commit},tasks){
+    var count = 0
+    const tasksData = await tasks
+    await tasksData.forEach( task => {
+      if(task.complete === true) {
+        count++
+      }
+    });  
+    if(tasksData.length === count) {
+      await tasksData.forEach( task => {
+        todoService.editTask({id: task._id, text: task.description, status: false})
+       }) 
+    } else {
+      await tasksData.forEach( task => {
+        todoService.editTask({id: task._id, text: task.description, status: true})
+      })
+    }
+    await commit('completeAll')
+  }, 
 
 };
 

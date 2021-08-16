@@ -25,7 +25,6 @@ export default {
         addTodoList(event){
             if (!event.target.value.trim()) return;
             this.item = event.target.value
-            console.log(this.item);
             this.$store.dispatch('tasks/addTask', this.item)
             this.$refs.disableInput.reset()
         }

@@ -39,11 +39,12 @@ import { mapMutations } from 'vuex'
 export default {
   name: 'App',
   methods: {
-    ...mapMutations([
-      'logout'
-    ]),
+    ...mapMutations({
+      clearTasks: 'tasks/clearTasks'
+    }),
     async handleLogout(){
       await this.$store.dispatch('auth/logout' )
+      await this.clearTasks()
       return this.$router.push({ name: 'Home'}).catch(() => {})
     }
   },
