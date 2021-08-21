@@ -7,14 +7,13 @@
        <v-text-field 
        class="TextInput"
        ref="disableInput"
-       label="What's On Your Mind?"
+       label="What's Your Focus for Today ?"
        @keyup.enter="addTodoList"
        clearable/>
     </v-card>
 </template>
 
 <script>
-import {mapMutations}  from 'vuex'
 export default {
     name: "InputTodo",
     data(){
@@ -23,13 +22,10 @@ export default {
         }
     },
     methods: {
-        ...mapMutations([
-            'addTodo'
-        ]),
         addTodoList(event){
             if (!event.target.value.trim()) return;
             this.item = event.target.value
-            this.addTodo({payload: this.item})
+            this.$store.dispatch('tasks/addTask', this.item)
             this.$refs.disableInput.reset()
         }
     },

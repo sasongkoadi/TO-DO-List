@@ -4,7 +4,7 @@
        max-width="700"
        tile >
        <template v-for="(todo,index) in showTodos" >
-        <v-list-item :key="todo.text">
+        <v-list-item :key="todo.description">
             <TodoListItems :todo="todo" :index="index"></TodoListItems> 
         </v-list-item>
        </template>
@@ -23,7 +23,9 @@ export default {
        
    },
    computed: {
-       ...mapGetters(['showTodos']),
+       ...mapGetters({
+           showTodos: 'tasks/showTodos'
+        }),
    },
 }
 

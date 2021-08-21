@@ -15,8 +15,8 @@
                 <v-col
                 cols="9"
                 class="text-left">
-                    <v-list-item-title  v-if="todo.complete === false"  class="text-list" @click="itsDone">{{todo.text}}</v-list-item-title>
-                    <v-list-item-title  v-else class="text-list complete" @click="itsDone">{{todo.text}}</v-list-item-title>
+                    <v-list-item-title  v-if="todo.complete === false"  class="text-list" @click="itsDone">{{todo.description}}</v-list-item-title>
+                    <v-list-item-title  v-else class="text-list complete" @click="itsDone">{{todo.description}}</v-list-item-title>
                 </v-col>
                 <v-col 
                 cols="3"
@@ -45,16 +45,17 @@ export default {
         index: Number
     },
     methods: {
-        ...mapMutations([
-            'deleteTodo',
-            "completeTodo",
-            "changeTodo" 
-            ]),
+        ...mapMutations({
+            deleteTodo : 'tasks/deleteTodo',
+            completeTodo : "tasks/completeTodo",
+            changeTodo : "tasks/changeTodo", 
+            }),
         removeTodo(){
-            this.deleteTodo({index: this.index})
+            this.$store.dispatch('tasks/deleteTask', {index: this.index, id: this.todo._id})
         },
         itsDone(){
-            this.completeTodo({index:this.index})
+            console.log('Boolean :',!this.todo.complete);
+            this.$store.dispatch('tasks/editTask', { id: this.todo._id, index: this.index, description: this.todo.description, status: !this.todo.complete} )
         },
         isEdit(){
             this.input = true
@@ -63,7 +64,7 @@ export default {
             this.input = false
         },
         editTask(){
-            this.changeTodo({ index: this.index, payload: event.target.value })
+            this.$store.dispatch('tasks/editTask', { id: this.todo._id, index: this.index, description: event.target.value, status: this.todo.complete} )
         }
     },
 }

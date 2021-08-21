@@ -15,7 +15,7 @@
                 text 
                 normal 
                 color="primary" 
-                @click="completeAll">
+                @click="completeTasks">
 
                     <caption >Complete : {{showCompleteTodo}}</caption>
 
@@ -58,16 +58,24 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations }  from 'vuex'
+import { mapGetters }  from 'vuex'
 export default {
     name: "Footer",
+    data() {
+        return {
+            todos: [],
+        }
+    },
     methods: {
-        ...mapMutations(['completeAll']) 
+        completeTasks(){
+            this.todos = this.showTodos
+            this.$store.dispatch('tasks/completeAllTasks',this.todos)
+        }, 
     },
     computed: {
-        ...mapGetters([
-            'showTodos',
-            'showCompleteTodo'])
+        ...mapGetters({
+            showTodos :'tasks/showTodos',
+            showCompleteTodo: 'tasks/showCompleteTodo'})
     },
 }
 </script>
